@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repository Activity</title>
+</head>
+<body>
+    <h1>Автор: {{ owner }}</h1>
+    <h2>Репозиторий: {{ repo }}</h2>
+    <p>Информация о коммитах с {{ since }} до {{ until }}</p>
+
+    {% if activity_data is not none and activity_data %}
+        <table border="1">
+            <tr>
+                <th>Date</th>
+                <th>Commits</th>
+                <th>Authors</th>
+            </tr>
+            {% for item in activity_data %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.commits }}</td>
+                    <td>{{ item.authors | join(", ") }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Нет данных о коммитах за указанный период.</p>
+    {% endif %}
+</body>
+</html>
+
